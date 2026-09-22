@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}extinct species{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item list-group-item-warning">{{ data|length }} extinct species.</li>
+        {% set prev_family = "" %}
+        {% set prev_order = "" %}
+        {% for item in data %}
+            {% if prev_order != item.order %}
+                <li class="list-group-item list-group-item-primary"><a href="/orders/{{ item.order }}" target="_self">{{ item.order }}</a></li>
+                {% set prev_order = item.order %}
+            {% endif %}
+            <ul class="list-unstyled list-group">
+                {% if prev_family != item.familyComName %}
+                    <li class="list-group-item list-group-item-secondary"><a href="/families/{{ item.familyComName }}" target="_self">{{ item.familyComName }}</a></li>
+                    {% set prev_family = item.familyComName %}
+                {% endif %}
+                <ul class="list-unstyled list-group">
+                    <li class="list-group-item list-group-item-action"><a href="https://duckduckgo.com/?q={{ item.comName }}&iax=1&ia=images" target="_blank" class="external">
+                        {{ item.comName }}</a> / {{ item.extinctYear }}</li>
+                </ul>
+            </ul>
+        {% endfor %}
+    </ul>
+    <br><br>
+{% endblock %}

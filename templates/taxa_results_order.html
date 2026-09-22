@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}taxa - order{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item list-group-item-primary">{{ data[0].order }}</li>
+        {% set prev_family = "" %}
+        {% for item in data %}
+            {% if prev_family != item.familyComName %}
+                <li class="list-group-item list-group-item-action"><a href="/families/{{ item.familyComName }}" target="_self">{{ item.familyComName }}</a></li>
+                {% set prev_family = item.familyComName %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}

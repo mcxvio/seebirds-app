@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}species{% endblock %}
+{% block content %}
+    <ul class="list-unstyled list-group">
+    {% if data.errors|length > 0 %}
+        <li class="list-group-item list-group-item-warning">{{ data.errors }}</li>
+    {% else %}
+        {% if data|length > 0 %}
+            <li class="list-group-item list-group-item-secondary"><a href="/checklists/{{ region }}">{{ region | replace("%20", " ") }}</a></li>
+            <li class="list-group-item list-group-item-success">
+                <a href="https://duckduckgo.com/?q={{ data[0].comName }}&iax=1&ia=images" target="_blank" class="external">{{ data[0].comName }}</a>
+            </li>
+            <li class="list-group-item">{{ data|length }} sightings in last {{ days }} days.</li>
+            {% for item in data %}
+                {% if item.obsDt|string() != "" %}
+                    <li class="list-group-item list-group-item-info">{{ item.obsDt }}</li>
+                {% endif %}
+                <li class="list-group-item list-group-item-action">
+                    {{ item.howMany }} sighted @ {{ item.obsTm }}
+                    <br>
+                    @ <a href="/locations/{{ region }}/{{ item.locName }}/{{ item.locId }}" target="_self">{{ item.locName }}</a>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li class="list-group-item list-group-item-warning">No sightings for species in region.</li>
+        {% endif %}
+    {% endif %}
+</ul>
+<br><br>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% if data != None and data|length > 0 %}
+    <ul>
+        <li>Previous Searches:</li>
+        {% for item in data %}
+            {% if item != None %}
+                <li><a href="/{{ page }}">{{ item }}</a></li>
+            {% endif %}
+        {% endfor %}
+        <li><a href="/clear_previous_regions">[Clear]</a></li>
+    </ul>
+{% endif %}

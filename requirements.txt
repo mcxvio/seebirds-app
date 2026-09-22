@@ -1,0 +1,5 @@
+flask>=0.12.3
+requests>=2.20.0
+Jinja2>=2.10.1
+ijson>=2.3
+Flask-Session>=0.3.1

@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+      #dockerfile: dockerfile.tests
+    environment:
+      PYTHONBUFFERED: 'true'
+    volumes:
+      - .:/app
+    ports:
+      - "9000:8080"

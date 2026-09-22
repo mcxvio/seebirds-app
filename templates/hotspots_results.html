@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}hotspots results{% endblock %}
+{% block head %}
+        <!-- Typeahead -->
+        <script src="/static/scripts/typeahead_prefetch_hotspots.js"></script>
+        <script src="/static/scripts/typeahead.min.js/typeahead.bundle.min.js"></script>
+        <script src="/static/scripts/typeahead.min.js/typeahead.jquery.min.js"></script>
+        <script src="/static/scripts/typeahead.min.js/bloodhound.min.js"></script>
+        <!-- End Typeahead -->
+{% endblock %}
+{% block content %}
+    <p><h6>In:</h6></p>
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item list-group-item-success">{{ region | replace("%20", " ") }}</li>
+        <!--<span style="visibility: hidden;">{{ code }}</span>-->
+    </ul>
+    <p><h6>Find:</h6></p>
+    <div id="prefetch-find" class="list-unstyled list-group mb-3">
+        <!-- Typeahead -->
+        <input autofocus class="typeahead form-control" type="text" placeholder="Search Hotspot" />
+    </div>
+
+    <div id="previous-hotspots">
+        {% if previous != None and previous|length > 0 %}
+            <ul class="list-unstyled list-group">
+                <li class="list-group-item list-group-item-secondary">Previous Hotspots:</li>
+                {% for item in previous %}
+                    {% if item != None %}
+                        <li class="list-group-item list-group-item-action"><a href="/{{ page }}/{{ item }}">{{ item.split('/')[1] }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                <li class="list-group-item list-group-item-warning"><a href="/clear">[Clear]</a></li>
+            </ul>
+        {% endif %}
+    </div>
+    <p><h6>All:</h6></p>
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item list-group-item-secondary"><a href="/hotspots/all/{{ region }}" target="_self">{{ region | replace("%20", " ") }}</a></li>
+    </ul>
+    <br><br>
+{% endblock %}

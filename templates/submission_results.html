@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}submission results{% endblock %}
+{% block content %}
+<ul class="list-unstyled list-group">
+    <li class="list-group-item list-group-item-secondary"><a href="/checklists/{{ region }}">{{ region | replace("%20", " ") }}</a></li>
+</ul>
+<ul class="list-unstyled list-group">
+    <li class="list-group-item list-group-item-success">
+        <a href="/locations/{{ region }}/{{ location_name }}/{{ data.locId }}" target="_self">{{ location_name | replace("%20", " ") }}</a>
+        (<a href="http://ebird.org/ebird/hotspot/{{ data.locId }}" target="_blank" class="external">Hotspot</a>)
+    </li>
+    <li class="list-group-item list-group-item-info">{{ data.obsDt }} @ {{ data.obsTm }} -- {{ data.userDisplayName }}</li>
+    <li class="list-group-item">{{ data.obs|length }} species.</li>
+    {% for item in data.obs %}
+    <li class="list-group-item list-group-item-action">
+        {{ item.howManyStr }} <a href="/species/{{ region }}/{{ item.comName }} ({{ item.speciesCode }})" target="_self">{{ item.comName }}</a>
+        <br>
+        {% if item.comments|length > 0 %}
+            -- {{ item.comments }}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<br><br>
+{% endblock %}

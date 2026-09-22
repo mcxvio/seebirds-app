@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}taxa - family{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item list-group-item-secondary">{{ data[0].familyComName }}</li>
+        {% for item in data %}
+            <li class="list-group-item list-group-item-action">
+                <a href="/taxa/{{ item.comName }} ({{ item.speciesCode }})/{{ item.familyComName }}/{{ item.order }}">{{ item.comName }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

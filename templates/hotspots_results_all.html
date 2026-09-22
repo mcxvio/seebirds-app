@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}hotspots results{% endblock %}
+{% block content %}
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item list-group-item-success">{{ region | replace("%20", " ") }}</li>
+    </ul>
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item">{{ data|length }} hotspots.</li>
+        {% for item in data %}
+            <li class="list-group-item list-group-item-action">
+                <a href="/locations/{{ region }}/{{ item.locName }}/{{ item.locId }}" target="_self">{{ item.locName }}</a>
+                <br>
+                lat: {{ item.lat }}, lng: {{ item.lng }}
+            </li>
+        {% endfor %}
+    </ul>
+    <br><br>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}home{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+        .home-height { height:10em; }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="list-group">
+        <p><h6>Welcome!</h6></p>
+        <a href="/checklists" class="list-group-item list-group-item-action home-height">checklists</a>
+        <a href="/notables" class="list-group-item list-group-item-action home-height">notables</a>
+        <a href="/hotspots" class="list-group-item list-group-item-action home-height">hotspots</a>
+        <a href="/taxa" class="list-group-item list-group-item-action home-height">taxa</a>
+        <a href="/extinct" class="list-group-item list-group-item-action home-height">extinct</a>
+    </div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+{% endblock %}

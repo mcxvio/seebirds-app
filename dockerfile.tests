@@ -1,0 +1,14 @@
+FROM python:3.9-alpine as builder
+
+LABEL maintainer="mcxvio@outlook.com"
+
+WORKDIR /home
+COPY . .
+
+RUN pip install flask
+RUN pip install ijson
+RUN pip install requests
+
+FROM builder as tester
+RUN python -m unittest tests/test_ebird_json.py
+RUN python -m unittest tests/test_ebird_api.py

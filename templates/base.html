@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>seebirds :: {% block title %}{% endblock %}</title>
+        <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
+        <!-- Bootstrap CSS -->
+        <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+        <link rel="stylesheet" href="/static/resources/bootstrap.min.css">
+        <!-- Iconic CSS -->
+        <link rel="stylesheet" href="/static/open-iconic-master/font/css/open-iconic-bootstrap.min.css">
+        <style type="text/css">
+            body {
+                background-size: 120%
+            }
+            .dropdown-nav {
+                width: 33.5%;
+            }
+            .dropdown-nav-item {
+                height: 2.75em;
+                padding-top: 0.66em;
+            }
+            .icon {
+                fill: rgb(3, 126, 255);
+                height: 32px;
+                width: 32px;
+            }
+            .navbar-light {
+                background-color: lightgray;
+            }
+        </style>         
+        <script>
+            function initialize() {
+                document.getElementById("year").innerHTML = (new Date()).getFullYear()
+            }
+        </script>
+        <script src="/static/resources/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+        <!--<script src="//code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>-->
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body onload="initialize()">
+        <div  class="container-fluid">
+            <div id="header" class="row">
+                <div class="col">
+                    <nav class="nav nav-pills nav-fill">
+                        <button class="btn dropdown-toggle nav-item nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg class="icon"><use xlink:href="/static/open-iconic-master/sprite/sprite.svg#menu" alt="menu"></use></svg>
+                        </button>
+                        <div class="dropdown-menu dropdown-nav" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item nav-item dropdown-nav-item" href="/checklists">checklists</a>
+                            <a class="dropdown-item nav-item dropdown-nav-item" href="/notables">notables</a>
+                            <a class="dropdown-item nav-item dropdown-nav-item" href="/hotspots">hotspots</a>
+                            <a class="dropdown-item nav-item dropdown-nav-item" href="/taxa">taxa</a>
+                            <a class="dropdown-item nav-item dropdown-nav-item" href="/extinct">extinct</a>
+                        </div>
+                        <a class="nav-item nav-link" href="/">
+                            <svg class="icon"><use xlink:href="/static/open-iconic-master/sprite/sprite.svg#home" alt="home"></use></svg>
+                        </a>
+                        <a class="nav-item nav-link" href="/providers">
+                            <svg class="icon"><use xlink:href="/static/open-iconic-master/sprite/sprite.svg#cog" alt="settings"></use></svg>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            <div id="content" class="row">
+                <div class="col">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div id="footer" class="row">
+                <div class="col">
+                    {% block footer %}
+                        <nav class="navbar fixed-bottom navbar-light">
+                            <p class="text-center"><center>&copy <span id="year"></span> M Hunt. Data by <a href="http://www.ebird.org" target="_blank" class="external">eBird</a>.</center></p>
+                        </nav>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="/static/resources/bootstrap.min.js"></script>
+        <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+    </body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}checklists results{% endblock %}
+{% block content %}
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item list-group-item-success">{{ region | replace("%20", " ") }}</li>
+        <li class="list-group-item">{{ data|length }} most recent checklists and species seen.</li>
+        {% for item in data %}
+            {% if item.obsDt|string() != "" %}
+                <li class="list-group-item list-group-item-info">{{ item.obsDt }}</li>
+            {% endif %}
+            <li class="list-group-item list-group-item-action">
+                {{ item.numSpecies }} species
+                <br>
+                @ <a href="/locations/{{ region }}/{{ item.loc.name }}/{{ item.locId }}" target="_self">{{ item.loc.name }}</a>
+                <br>
+                <a href="/submission/{{ region }}/{{ item.loc.name }}/{{ item.subID }}" target="_self">{{ item.obsTime }}</a>
+                -- {{ item.userDisplayName }}
+            </li>
+        {% endfor %}
+    </ul>
+    <br><br>
+{% endblock %}

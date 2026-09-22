@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}location{% endblock %}
+{% block content %}
+<ul class="list-unstyled list-group">
+    <li class="list-group-item list-group-item-secondary"><a href="/checklists/{{ region }}">{{ region | replace("%20", " ") }}</a></li>
+</ul>
+<ul class="list-unstyled list-group">
+    <li class="list-group-item list-group-item-success">
+        <a href="/checklists/{{ region }}/{{ name }}/{{ id }}">{{ name | replace("%20", " ") }}</a>
+        (<a href="http://ebird.org/ebird/hotspot/{{ id }}" target="_blank" class="external">Hotspot</a>)
+    </li>
+    {% if data|length == 0 %}
+    <li class="list-group-item list-group-item-warning">No data found: check location.</li>
+    {% else %}
+        <li class="list-group-item">{{ data|length }} species in last {{ days }} days.</li>
+        {% for item in data %}
+            {% if item.obsDt|string() != "" %}
+                <li class="list-group-item list-group-item-info">{{ item.obsDt }}</li>
+            {% endif %}
+            <li class="list-group-item list-group-item-action">
+                {{ item.howMany }} <a href="/species/{{ region }}/{{ item.comName }} ({{ item.speciesCode }})" target="_self">{{ item.comName }}</a>
+            </li>
+        {% endfor %}
+    {% endif %}
+</ul>
+<br><br>
+{% endblock %}

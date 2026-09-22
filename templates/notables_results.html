@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}notables results{% endblock %}
+{% block content %}
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item list-group-item-success">{{ region | replace("%20", " ") }}</li>
+        <li class="list-group-item">{{ data|length }} notable sightings in last {{ days }} days.</li>
+        {% for item in data %}
+            {% if item.obsDt|string() != "" %}
+                <li class="list-group-item list-group-item-info">{{ item.obsDt }}</li>
+            {% endif %}
+            <li class="list-group-item list-group-item-action">
+                {{ item.howMany }} <a href="/species/{{ region }}/{{ item.comName }} ({{ item.speciesCode }})" target="_self">{{ item.comName }}</a>
+                <br>
+                @ <a href="/locations/{{ region }}/{{ item.locName }}/{{ item.locId }}" target="_self">{{ item.locName }}</a>
+                <br>
+                <a href="/submission/{{ region }}/{{ item.locName }}/{{ item.subId }}" target="_self">{{ item.obsTm }}</a>
+                -- {{ item.userDisplayName }}
+            </li>
+        {% endfor %}
+    </ul>
+    <br><br>
+{% endblock %}
