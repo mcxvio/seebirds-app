@@ -6,15 +6,18 @@
 - Keep changes scoped to the current Linear issue. Do not combine startup fixes with an unsolicited rewrite or dependency modernization.
 
 ## Delivery workflow
-- ChatGPT and Marcus agree scope; Linear holds the task, context, boundaries and acceptance criteria; Codex implements and validates; GitHub hosts the pull request; Marcus reviews and merges.
+- ChatGPT and Marcus agree scope; ChatGPT creates the Linear issue; Codex Cloud implements and validates; ChatGPT publishes the GitHub PR and links it in Linear; Marcus reviews and merges in GitHub.
 - Every repository change must be tracked by a Linear issue in the seebirds-app project.
 - Inspect the repository instructions and current source before editing. Confirm the repository identity and base commit; target main unless the issue specifies otherwise.
-- Implement on a task branch, include the Linear issue identifier in the branch and PR title, and link the Linear issue in the PR body.
-- Commit the scoped changes and create the GitHub PR directly using supported authenticated tools or Codex publication facilities when available. Do not stop at a local diff if PR publication is available.
+- Codex commits the scoped changes on a task branch and reports the base SHA, commit SHA, changed paths, validation commands/results and remaining limitations in the originating Linear session.
+- Provide an accessible complete patch or changed files for ChatGPT to retrieve. A summary or a commit SHA that exists only inside Codex Cloud is insufficient for publishing code changes.
+- ChatGPT reviews the actual changes against the base, publishes them to a task branch, creates a PR targeting main, and records the PR URL in Linear. Include the Linear issue identifier in the branch and PR title and link the issue in the PR body.
+- If the complete changes cannot be retrieved, report that handoff blocker; do not reconstruct implementation code from a summary or claim the PR is published.
+- Codex Cloud does not need to push from its shell or create the PR. Missing shell GitHub credentials alone do not block implementation and validation.
 - Do not push directly to main, merge, enable auto-merge or deploy unless Marcus explicitly authorizes that action.
-- Report the result in the originating Linear issue/session: summary, validation commands and results, remaining limitations, commit SHA, and actual GitHub PR URL and target branch.
 - Verify the PR exists and the Linear link is present. Distinguish a local commit, a published branch and a published PR. Never claim publication, CI success, merge or deployment without evidence.
-- If publication is unavailable, preserve the completed change, report the exact blocker and identify the remaining handoff. Never invent a PR URL or request credentials be pasted into an issue.
+- When checking the delivery pipeline, report network access, GitHub authentication, branch publication and PR creation separately; a successful public repository read does not prove write access.
+- Preserve completed work if publication is unavailable, and report the exact blocker. Never invent a PR URL or request credentials be pasted into an issue.
 
 ## Task sizing and decisions
 - Follow the adopted process inspired by Matt Pocock's /to-spec and /to-tickets: start with the thinnest independently demonstrable working path and expand in small coherent changes.
